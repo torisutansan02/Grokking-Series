@@ -8,17 +8,17 @@
 from typing import List, Dict
 
 def flatten_user_logs(logs: List[Dict]) -> List[Dict]:
-    flatten = []
+    flattened = []
 
     for log in logs:
         user = log["user"]
-        flatten.append({
+        flattened.append({
             "userId": user["id"],
             "userName": user["name"],
             "action": log["action"]
         })
     
-    return flatten
+    return flattened
 
 if __name__ == "__main__":
     sample_logs = [

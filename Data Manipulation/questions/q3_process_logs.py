@@ -18,7 +18,7 @@ def processLogs(logs: List[str], maxSpan: int) -> List[str]:
         else:
             user_times[uid][0] = min(user_times[uid][0], ts)
             user_times[uid][1] = max(user_times[uid][1], ts)
-
+    
     return sorted([
         uid
         for uid, (start, end) in user_times.items()
