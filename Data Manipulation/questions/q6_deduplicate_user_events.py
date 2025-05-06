@@ -13,7 +13,7 @@ def deduplicate_user_events(logs: List[Dict[str, str]]) -> Dict[str, List[str]]:
         user = log["userId"]
         event = log["event"]
         user_events[user].add(event)
-
+    
     return {
         user: sorted(events)
         for user, events in user_events.items()

@@ -14,24 +14,25 @@ from typing import List, Dict
 
 def get_users_within_duration(logs: List[Dict[str, str]], maxDuration: int) -> List[str]:
     sign_in_times = {}
-    result = []
+    res = []
 
     for log in logs:
-        user = log["userId"]
+        uid = log["userId"]
         log_type = log["type"]
-        ts = int(log["timestamp"])  # Ensure it's an int
+        ts = int(log["timestamp"])
 
         if log_type == "sign-in":
-            if user not in sign_in_times:
-                sign_in_times[user] = ts
+            if uid not in sign_in_times:
+                sign_in_times[uid] = ts
         elif log_type == "sign-out":
-            if user in sign_in_times:
-                duration = ts - sign_in_times[user]
+            if uid in sign_in_times:
+                duration = ts - sign_in_times[uid]
                 if duration <= maxDuration:
-                    result.append(user)
-                del sign_in_times[user]  # Clean up to avoid duplicates
+                    res.append(uid)
+                del sign_in_times[uid]
+        
+    return sorted(res)
 
-    return sorted(result)
 
 # Optional debug run
 if __name__ == "__main__":

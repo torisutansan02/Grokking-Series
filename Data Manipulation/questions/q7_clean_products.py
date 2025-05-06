@@ -15,12 +15,11 @@ def clean_product_data(products: List[Dict[str, str]]) -> List[Dict[str, Any]]:
         price = float(product["price"].replace("$", ""))
         stock = int(product["stock"])
 
-        if stock > 0:
-            cleaned.append({
-                "id": product["id"],
-                "price": price,
-                "stock": stock
-            })
+        cleaned.append({
+            "id": product["id"],
+            "price": price,
+            "stock": stock
+        })
 
     return cleaned
 

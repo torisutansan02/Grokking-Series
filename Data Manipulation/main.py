@@ -12,6 +12,10 @@ from questions.q8_filter_malformed import filter_valid_logs
 from questions.q9_aggregate_expenses import aggregate_monthly_expenses
 from questions.q10_session_duration import get_users_within_duration
 from questions.q11_match_clicks_purchases import match_click_purchase
+from questions.q12_normalize_logs import normalize_logs
+from questions.q13_merge_user_profiles import merge_user_profiles
+from questions.q14_resolve_user_conflicts import resolve_user_conflicts
+from questions.q15_normalize_user_names import normalize_user_names
 
 def run_q1_example():
     print("=== Q1: User Time Ranges ===")
@@ -148,6 +152,52 @@ def run_q11_example():
     result = match_click_purchase(clicks, purchases, 60)
     print(result)
 
+def run_q12_example():
+    print("\n=== Q12: Normalize Mixed Logs ===")
+    logs = [
+        {"userId": "u1", "timestamp": 100, "eventType": "click", "metadata": {"elementId": "btn-1"}},
+        {"userId": "u2", "timestamp": 110, "eventType": "view", "metadata": {"page": "home"}},
+        {"userId": "u3", "timestamp": 120, "eventType": "click", "metadata": {}},
+        {"userId": "u4", "timestamp": 130, "eventType": "view"}
+    ]
+    result = normalize_logs(logs)
+    print(result)
+
+def run_q13_example():
+    print("\n=== Q13: Merge User Profiles ===")
+    basic = [
+        {"userId": "u1", "email": "a@example.com"},
+        {"userId": "u2", "email": "b@example.com"}
+    ]
+    extended = [
+        {"userId": "u1", "name": "Alice"},
+        {"userId": "u3", "name": "Charlie"}
+    ]
+    print(merge_user_profiles(basic, extended))
+
+def run_q14_example():
+    print("\n=== Q14: Resolve User Conflicts ===")
+    sourceA = [
+        {"userId": "u1", "name": "Alice", "timestamp": 100},
+        {"userId": "u2", "name": "Bob", "timestamp": 120}
+    ]
+    sourceB = [
+        {"userId": "u1", "name": "Alicia", "timestamp": 130},
+        {"userId": "u3", "name": "Charlie", "timestamp": 125}
+    ]
+    result = resolve_user_conflicts(sourceA, sourceB)
+    print(result)
+
+def run_q15_example():
+    print("\n=== Q15: Normalize Optional Name Fields ===")
+    users = [
+        {"userId": "u1", "fullName": "Alice Johnson"},
+        {"userId": "u2", "firstName": "Bob", "lastName": "Smith"},
+        {"userId": "u3", "firstName": "Charlie"},
+        {"userId": "u4", "lastName": "Doe"},
+        {"userId": "u5"}
+    ]
+    print(normalize_user_names(users))
 
 if __name__ == "__main__":
     run_q1_example()
@@ -161,3 +211,7 @@ if __name__ == "__main__":
     run_q9_example()
     run_q10_example()
     run_q11_example()
+    run_q12_example()
+    run_q13_example()
+    run_q14_example()
+    run_q15_example()

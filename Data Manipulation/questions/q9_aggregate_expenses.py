@@ -20,8 +20,22 @@
 from typing import List, Dict
 
 def aggregate_monthly_expenses(expenses: List[Dict]) -> Dict[str, Dict[str, float]]:
-    # Your implementation here
-    pass
+    res = {}
+
+    for expense in expenses:
+        user = expense["userId"]
+        month = expense["date"][:7]
+        amount = expense["amount"]
+
+        if user not in res:
+            res[user] = {}
+        
+        if month not in res[user]:
+            res[user][month] = 0.0
+        
+        res[user][month] += amount
+    
+    return res
 
 # Optional debug test
 if __name__ == "__main__":
